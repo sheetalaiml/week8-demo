@@ -39,11 +39,14 @@ pipeline {
             }
         }
 
-        stage('Deploy with Ansible') {
-            steps {
-                bat 'wsl.exe -d Ubuntu -- ansible-playbook -i /mnt/c/week8-deploy/ansible/inventory /mnt/c/week8-deploy/ansible/deploy.yml'
-            }
-        }
+        
+stage('Deploy with Ansible') {
+    steps {
+        bat 'schtasks /Run /TN "AnsibleDeploy"'
+        echo 'Ansible deployment task triggered.'
+    }
+}
+
     }
 
     post {
